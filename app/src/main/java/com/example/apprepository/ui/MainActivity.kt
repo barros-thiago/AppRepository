@@ -1,10 +1,13 @@
 package com.example.apprepository.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.SearchView
+import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import com.example.apprepository.R
 import com.example.apprepository.core.createDialog
 import com.example.apprepository.core.createProgressDialog
@@ -39,6 +42,10 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 }
             }
         }
+
+        binding.toolbar.setNavigationOnClickListener(){
+            binding.root.hideSoftKeyboard()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -46,13 +53,6 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         val searchView = menu.findItem(R.id.actionSearch).actionView as SearchView
         searchView.setOnQueryTextListener(this)
         return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            binding.root.hideSoftKeyboard()
-        }
-        return false
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -64,4 +64,5 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onQueryTextChange(newText: String?): Boolean {
         return false
     }
+
 }
